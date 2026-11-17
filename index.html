@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>piano</title>
+
+  <!-- Prism.js syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+
+  <link rel="icon" type="image/png" href="img/favicon.png">
+
+  <!-- Includes the stylesheet file styles.css -->
+  <link rel="stylesheet" href="styles.css?v=2" />
+
+  <script>
+    window.addEventListener("beforeprint", () => {
+      const proto = document.getElementById("prototypeImage");
+      const printHeroImg = document.querySelector("#print-hero img");
+
+      if (proto && printHeroImg) {
+        printHeroImg.src = proto.src;
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <!-- Fixed Navigation Menu -->
+  <nav id="menu">
+    <h3>Menu</h3>
+    <ul>
+      <li><a href="#top">Title</a></li>
+      <li><a href="#information">Project Information</a></li>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#circuit-diagram">Circuit</a></li>
+      <li><a href="#environment">Environment</a></li>
+      <li><a href="#bom">BoM</a></li>
+      <li><a href="#prototype">Prototype</a></li>
+      <li><a href="#code">Code</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+      <li><a href="#references">References</a></li>
+    </ul>
+  </nav>
+
+  <button class="print-button" onclick="window.print()"
+    style="position: fixed; bottom: 24px; right: 24px; padding: 10px 16px; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.15); font-size: 0.9rem; z-index: 2000;">Print
+    This Page</button>
+
+  <h1 id="top">Collision Warning System</h1>
+  <div id="print-hero" style="display:none;">
+    <img src="" alt="Print Hero Image">
+  </div>
+
+  <section id="information">
+    <h2>Project Information</h2>
+    <p><strong>Course:</strong> TECH 117 (Computer Engineering Technology, Fall 2025)</p>
+    <p><strong>Instructor:</strong> Ph.D. Ana Rodrigues</p>
+    <p><strong>Team Members:</strong></p>
+    <ul>
+      <li>Ada Lovelace</li>
+      <li>Grace Hopper</li>
+      <li>Alan Turing</li>
+      <li>Charles Babbage</li>
+    </ul>
+  </section>
+
+  <section id="introduction">
+    <h2>Introduction & Problem Context</h2>
+    <p>Urban mobility and tight-space maneuvering pose constant challenges for drivers, pedestrians, and industrial
+      operators who face blind spots and spatial miscalculations leading to frequent low-speed collisions and property
+      damage. Traditional mechanical mirrors and manual checks often fail to provide real-time spatial awareness,
+      resulting in costly fender-benders, warehouse accidents, and pedestrian safety hazards in confined environments.
+      Addressing this persistent hazard requires accessible, low-cost sensor technologies that deliver immediate,
+      intuitive feedback before spatial boundaries are breached.</p>
+
+    <h2>Project Description</h2>
+    <p>This embedded systems project implements a proximity-based warning mechanism using an Arduino Uno microcontroller
+      integrated with an HC-SR04 ultrasonic sensor, a passive buzzer, and a tri-color LED array. By calculating the
+      time-of-flight of high-frequency sound waves, the system dynamically measures distances to nearby obstacles and
+      translates spatial data into escalating auditory and visual cues. Green, yellow, and red LEDs light up
+      sequentially as distance decreases, complemented by a variable-frequency buzzer tone that mimics modern automotive
+      reversing sensor networks.</p>
+
+    <h2>Connection to WHO Goals</h2>
+    <p>This project directly aligns with the World Health Organization's Sustainable Development Goal 3: Good Health and
+      Well-Being, specifically Target 3.6, which aims to halve the number of global deaths and injuries from road
+      traffic accidents. By promoting accessible, low-cost technological interventions that enhance spatial awareness
+      and prevent collisions, this prototype supports the WHO's global strategy for safer mobility and workplace safety.
+      Developing affordable proximity alerts helps reduce preventable impact injuries, lessening the overall strain on
+      emergency medical systems and healthcare resources worldwide.</p>
+
+    <h2>Requirement Analysis</h2>
+    <p>The system needs to use an ultrasonic sensor to constantly measure distances from 2 cm to 400 cm accurately. It
+      should show three warning levels using lights and a buzzer:</p>
+    <ul>
+      <li>Green light for safe distances (> 30 cm).</li>
+      <li>Yellow light for caution ranges (10 cm to 30 cm).</li>
+      <li>Red light and fast buzzer beeps for danger zones (< 10 cm).</li>
+    </ul>
+    <p>It also needs to run reliably on standard 5V USB power, use very little electricity, and react instantly in
+      different environments.</p>
+
+    <h2>System Limitations</h2>
+    <ul>
+      <li>
+        <strong>Budget and parts limit:</strong> Specialized components might be too expensive or hard to source.
+        <span class="alt-solution"><strong>Alternative solution:</strong> Use budget-friendly, common alternatives (like
+          basic sensors) and rely on open-source designs to lower costs.</span>
+      </li>
+      <li>
+        <strong>Complex code difficulty:</strong> Writing advanced filtering algorithms to stop false alarms can be hard
+        to implement.
+        <span class="alt-solution"><strong>Alternative solution:</strong> Use basic moving average code or existing
+          Arduino libraries instead of building complex algorithms from scratch.</span>
+      </li>
+      <li>
+        <strong>Time constraints:</strong> Setting up, testing, and troubleshooting might take too long to finish on
+        time.
+        <span class="alt-solution"><strong>Alternative solution:</strong> Build a minimal viable prototype first with
+          basic lights, adding advanced features only if extra time permits.</span>
+      </li>
+      <li>
+        <strong>Hardware limits:</strong> Soft surfaces or angled objects can deflect sound and cause inaccurate
+        readings.
+        <span class="alt-solution"><strong>Alternative solution:</strong> Add simple fallback rules in the code or
+          adjust physical sensor angles during testing to improve detection reliability.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="circuit-diagram">
+    <h2>Circuit Diagram</h2>
+    <p>The ultrasonic sensor measures distance; the Arduino activates LEDs and the buzzer according to distance
+      thresholds.</p>
+    <img src="img/collision-warning-system-Arduino.jpg" alt="Arduino collision warning system">
+  </section>
+
+  <section id="environment">
+    <h2>Environmental Impact Assessment</h2>
+    <ul>
+      <li><strong>Materials:</strong> The Arduino Uno is RoHS and WEEE compliant, limiting hazardous substances.</li>
+      <li><strong>Energy Efficiency:</strong> The circuit draws minimal power (~50 mA at 5V), ideal for USB or solar
+        power.</li>
+      <li><strong>Reusability:</strong> All components are modular and reusable, reducing electronic waste.</li>
+      <li><strong>Packaging & Shipping:</strong> Ordering all components from a single supplier helps minimize the
+        carbon footprint.</li>
+    </ul>
+  </section>
+
+  <section id="bom">
+    <h2>Bill of Materials (BoM)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Unit Price</th>
+          <th>Subtotal</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Arduino Uno Rev3</td>
+          <td>1</td>
+          <td>$27.60</td>
+          <td>$27.60</td>
+          <td><a href="https://store-usa.arduino.cc/products/arduino-uno-rev3">Arduino Store</a></td>
+        </tr>
+        <tr>
+          <td>HC-SR04 Ultrasonic Sensor</td>
+          <td>1</td>
+          <td>$3.95</td>
+          <td>$3.95</td>
+          <td><a href="https://www.adafruit.com/product/3942">Adafruit</a></td>
+        </tr>
+        <tr>
+          <td>Passive Buzzer</td>
+          <td>1</td>
+          <td>$0.95</td>
+          <td>$0.95</td>
+          <td><a href="https://www.sparkfun.com/passive-buzzer-module.html">SparkFun</a></td>
+        </tr>
+        <tr>
+          <td>LEDs (Red, Yellow, Green)</td>
+          <td>3</td>
+          <td>$0.20</td>
+          <td>$0.60</td>
+          <td>Adafruit</td>
+        </tr>
+        <tr>
+          <td>220 Ω Resistors</td>
+          <td>3</td>
+          <td>$0.03</td>
+          <td>$0.09</td>
+          <td>Adafruit</td>
+        </tr>
+        <tr>
+          <td>Breadboard</td>
+          <td>1</td>
+          <td>$4.95</td>
+          <td>$4.95</td>
+          <td><a href="https://www.adafruit.com/product/64">Adafruit</a></td>
+        </tr>
+        <tr>
+          <td>Jumper Wires</td>
+          <td>1 set</td>
+          <td>$3.50</td>
+          <td>$3.50</td>
+          <td><a href="https://www.sparkfun.com/jumper-wires-standard-7-m-m-30-awg-30-pack.html">SparkFun</a></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Estimated Total</td>
+          <td>$41.64</td>
+          <td>—</td>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <section id="prototype">
+    <h2>Prototype</h2>
+    <p>The following image shows the assembled prototype on a breadboard.</p>
+    <img id="prototypeImage" src="img/prototype.jpg" alt="Collision warning system prototype">
+  </section>
+
+  <section id="code">
+    <h2>Arduino Code</h2>
+    <p>The following Arduino code controls the system, lighting LEDs and activating the buzzer based on distance
+      readings from the HC-SR04 sensor.</p>
+    <div class="code-container" style="position: relative;">
+      <button class="copy-btn" onclick="copyCode()"
+        style="position:absolute; top:8px; right:8px; z-index:10;">Copy</button>
+      <pre class="line-numbers"><code id="arduinoCode" class="language-cpp">
+// Collision Warning System with Distance Sensor (HC-SR04)
+// Author: Ana Rodrigues
+// Oct 2, 2025
+// Object is farther than 30cm: Green LED lights up
+// Object is closer than 30 cm, but more than 10cm away: Yellow LED lights, buzzer plays 300Hz tone
+// Object is closer than 10cm: Red LED lights up, buzzer plays 500Hz tone
+
+// LED pins
+const int greenLED = 2;
+const int yellowLED = 3;
+const int redLED = 4;
+
+// Ultrasonic sensor pins
+const int trigPin = 9;
+const int echoPin = 10;
+
+// Passive buzzer pin
+const int buzzer = 11;
+
+void setup() {
+  pinMode(greenLED, OUTPUT);
+  pinMode(yellowLED, OUTPUT);
+  pinMode(redLED, OUTPUT);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Measure distance
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  long duration = pulseIn(echoPin, HIGH);
+  long distance = duration * 0.034 / 2;
+
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+  
+  // Error in measurement:
+  if (distance <= 0)
+    return;
+
+  // Too close:
+  if (distance <= 10) {
+    digitalWrite(greenLED, LOW);
+    digitalWrite(yellowLED, LOW);
+    digitalWrite(redLED, HIGH);
+    tone(buzzer, 500); // Play 500Hz tone
+    return;
+  }
+
+  // Midrange:
+  if (distance <= 30) {
+    digitalWrite(greenLED, LOW);
+    digitalWrite(yellowLED, HIGH);
+    digitalWrite(redLED, LOW);
+    tone(buzzer, 300); // Play 300Hz tone
+    return;
+  }
+
+  // Normal status:
+  digitalWrite(greenLED, HIGH);
+  digitalWrite(yellowLED, LOW);
+  digitalWrite(redLED, LOW);
+  noTone(buzzer); // stop buzzer
+
+  delay(100);
+}
+      </code></pre>
+    </div>
+
+    <script>
+      function copyCode() {
+        const code = document.getElementById('arduinoCode').innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          alert('Code copied to clipboard!');
+        });
+      }
+    </script>
+  </section>
+
+
+ <section id="conclusion">
+    <h2>Conclusion & Reflections</h2>
+    <p>
+      This project successfully shows how an Arduino and an ultrasonic sensor can work together to create an affordable, practical collision warning system that improves safety in tight spaces.
+    </p>
+
+    <h3>What We Learned</h3>
+    <ul>
+      <li>
+        <strong>How Ultrasonic Sensors Work:</strong> We learned how sound waves bounce off objects and how to calculate the time it takes to measure exact distances.
+      </li>
+      <li>
+        <strong>Programming Conditional Controls:</strong> We learned how to write code that changes the system's behavior: switching between green, yellow, and red lights and different buzzer beeps depending on how close an object is.
+      </li>
+      <li>
+        <strong>Hands-on Circuit Building:</strong> We gained practical experience wiring components on a breadboard, choosing the right resistors, and testing our hardware safely.
+      </li>
+    </ul>
+
+    <h3>Challenge and Solution</h3>
+    <p>
+      <strong>Challenge:</strong> At first, the sensor sometimes gave jumpy, erratic readings because sound waves bounced off soft surfaces or awkward angles, causing the lights and buzzer to flicker randomly.
+    </p>
+    <p>
+      <strong>Solution:</strong> We fixed this by adding a quick check in our code to ignore bad or zero-value readings, which made the warning system smooth and dependable.
+    </p>
+  </section>
+
+  <section id="references">
+    <h2>References</h2>
+    <ul>
+      <li>
+        Arduino Project Hub. (n.d.).
+        <em>Ultrasonic sensor projects.</em>
+        Arduino Project Hub.
+        <a href="https://projecthub.arduino.cc/projects/tags/ultrasonic-sensor" target="_blank"
+          rel="noopener noreferrer">
+          https://projecthub.arduino.cc/projects/tags/ultrasonic-sensor
+        </a>
+      </li>
+      <li>
+        Arduino Project Hub. (n.d.).
+        <em>Buzzer projects.</em>
+        Arduino Project Hub.
+        <a href="https://create.arduino.cc/projecthub/projects/tags/buzzer" target="_blank" rel="noopener noreferrer">
+          https://create.arduino.cc/projecthub/projects/tags/buzzer
+        </a>
+      </li>
+      <li>
+        Arduino Project Hub. (n.d.).
+        <em>LED projects.</em>
+        Arduino Project Hub.
+        <a href="https://projecthub.arduino.cc/projects/tags/led" target="_blank" rel="noopener noreferrer">
+          https://projecthub.arduino.cc/projects/tags/led
+        </a>
+      </li>
+      <li>
+        Instructables. (n.d.).
+        <em>Distance measurement using ultrasonic sensor.</em>
+        Instructables.
+        <a href="https://www.instructables.com/Arduino-Distance-Measurement-Using-Ultrasonic-Senso/" target="_blank"
+          rel="noopener noreferrer">
+          https://www.instructables.com/Arduino-Distance-Measurement-Using-Ultrasonic-Senso/
+        </a>
+      </li>
+      <li>
+        Circuit Basics. (n.d.).
+        <em>How to use an ultrasonic sensor with Arduino.</em>
+        Circuit Basics.
+        <a href="https://www.circuitbasics.com/how-to-use-an-ultrasonic-sensor-with-arduino/" target="_blank"
+          rel="noopener noreferrer">
+          https://www.circuitbasics.com/how-to-use-an-ultrasonic-sensor-with-arduino/
+        </a>
+      </li>
+      <li>
+        Last Minute Engineers. (n.d.).
+        <em>Ultrasonic sensor tutorial.</em>
+        Last Minute Engineers.
+        <a href="https://lastminuteengineers.com/ultrasonic-sensor-arduino-tutorial/" target="_blank"
+          rel="noopener noreferrer">
+          https://lastminuteengineers.com/ultrasonic-sensor-arduino-tutorial/
+        </a>
+      </li>
+    </ul>
+  </section>
+</body>
+
+</html>
